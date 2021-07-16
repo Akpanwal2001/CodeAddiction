@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Home | CodeAddiction
+{% endblock title %}
+
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block body_content %}
+
+<!-- Introduction of Code Addiction start here -->
+{% if allPosts.number < 2 %}
+    <div class="container mt-4">
+        <div class="shadow-lg bg-dark text-light rounded">
+        <div class="container py-5">
+            <h1 class="display-5 fw-bold d-flex justify-content-center">Introduction of Code Addiction</h1>
+                <span class="h4">Hello all of You</span>
+                <p>Code Addiction is Now Only a One man Group. That wants to fly. Code Addiction is now only a name but it will be a Addiction of all Programmers.</p>
+        </div>
+        </div>
+    </div>
+{% endif %}
+<!-- Introduction of Code Addiction end here -->
+
+    <div class="container my-3">
+        <h3>Popular Blogs</h3>
+        {% for post in allPosts %}
+            <div class="row g-0 my-3 border rounded overflow-hidden flex-md-row mb-4 shadow-lg h-md-250 position-relative">
+                <div class="col p-2 d-flex flex-column position-static">
+                    
+                    <h4 class="mb-0">{{ post.title }} <small class="d-inline-block h6 mb-0 text-primary"> ({{post.view}} Views)</small></h4>
+                    <div class="mb-1 text-muted">{{ post.datetime}} <span class="d-inline-block mb-0 text-primary"> By {{post.author}} </span>
+                    </div>
+                    <p class="card-text mb-auto">{{post.short_content|truncatechars:300}}</p>
+                    <div>
+                        <a href="{{post.slug}}" role="button" class=" btn btn-secondary text-dark">Continue reading</a>
+                    </div>
+                </div>
+
+                <div class="col-auto d-none d-lg-block">
+                    <img class=" shadow-sm bd-placeholder-img" width="330" height="200" src="/media/{{post.thumbnail}}" alt="">
+                </div>
+
+            </div>
+        {% endfor %}
+    </div> 
+{% endblock body_content %}
+
+    <!-- *********** pagination ************    -->
+
+    {% block pagination %}
+        <br>
+        <div class="container">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% if allPosts.has_previous %}
+                        <li class="page-item">
+                        <a class="page-link" href="?page={{allPosts.previous_page_number}}" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link" href="?page={{allPosts.number}}">{{allPosts.number}}</a></li>
+                    {% if allPosts.has_next %}
+                        <li class="page-item">
+                        <a class="page-link" href="?page={{allPosts.next_page_number}}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    {% endblock pagination %}

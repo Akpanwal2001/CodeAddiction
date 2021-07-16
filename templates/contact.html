@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contact | CodeAddiction
+{% endblock title %}
+
+{% block contactactive %} active{% endblock contactactive %}
+
+
+{% block body_content %}
+
+<div class="container mt-3 mb-4">
+    <h3>Contact Us</h3>
+    <form action="/contact/" method="post" >
+    {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+        </div>
+        <div class="mb-3">
+            <label for="emailcontact" class="form-label">Email</label>
+            <input type="email" class="form-control" name="emailcontact" id="emailcontact" placeholder="Email">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Whats your issue : </label>
+            <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-secondary text-dark" > Submit</button>
+    </form>
+</div>
+{% endblock body_content %}
